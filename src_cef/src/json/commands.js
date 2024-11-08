@@ -237,7 +237,7 @@ export default [
     {
         "cmd":"/arrest [id]",
         "descr":"Арестовать игрока. (Поместить в КПЗ)",
-        "category":["LSPD", "FIB"]
+        "category":["LSPD", "FIB", "PRISON"]
     },
     {
         "cmd":"/rfp [id]",

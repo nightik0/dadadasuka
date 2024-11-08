@@ -1305,8 +1305,9 @@ namespace NeptuneEvo
                         sessionData.TimersData.ArrestTimer = Timers.Start(1000, () => FractionCommands.arrestTimer(player));
                         if (characterData.ArrestType == 1) player.Position = Sheriff.FirstPrisonPosition;
                         else if (characterData.ArrestType == 2) player.Position = Sheriff.SecondPrisonPosition;
+                        else if (characterData.ArrestType == 3) player.Position = Prison.PrisonPosition;
                         else player.Position = Police.PrisonPosition;
-                    }
+                    } //скибиди
                 }
                 else if (characterData.DemorganTime > 0)
                 {

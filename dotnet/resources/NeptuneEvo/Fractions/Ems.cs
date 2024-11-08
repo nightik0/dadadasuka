@@ -521,6 +521,7 @@ namespace NeptuneEvo.Fractions
                     {
                         if (characterData.ArrestType == 1) spawnPos = Sheriff.FirstPrisonPosition;
                         else if (characterData.ArrestType == 2) spawnPos = Sheriff.SecondPrisonPosition;
+                        else if (characterData.ArrestType == 3) spawnPos = Prison.PrisonPosition;
                         else spawnPos = Police.PrisonPosition;
                     }
                     else if (fracId == (int) Models.Fractions.ARMY) 

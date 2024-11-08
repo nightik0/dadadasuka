@@ -84,7 +84,7 @@ namespace NeptuneEvo.Character.Models
         /// 
         /// </summary>
         [JsonIgnore]
-        public sbyte ArrestType { get; set; } = 0;
+        public int ArrestType { get; set; } = 0;
         /// <summary>
         /// 
         /// </summary>

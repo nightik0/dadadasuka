@@ -6104,6 +6104,68 @@ namespace NeptuneEvo.Fractions.Models
             new ClothingSetData(0, Fractions.SHERIFF, ClothesComponent.Undershort, 103, 0),
             new ClothingSetData(0, Fractions.SHERIFF, ClothesComponent.Undershort, 103, 3),
             new ClothingSetData(0, Fractions.SHERIFF, ClothesComponent.Undershort, 103, 5),
+
+
+            //
+
+            //prsn MALE
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Masks, 211, 0),
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Masks, 211, 1),
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Masks, 211, 2),
+
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.None, 208, 0),
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.None, 208, 1),
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.None, 208, 2),
+
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Legs, 151, 0),
+
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Accessories, 177, 0),
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Accessories, 181, 0),
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Accessories, 182, 0),
+
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Tops, 414, 9),
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Tops, 415, 9),
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Tops, 416, 5),
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Tops, 427, 0),
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Tops, 427, 1),
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Tops, 428, 0),
+
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Decals, 129, 0),
+
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Hat, 184, 0),
+            new ClothingSetData(1, Fractions.PRISON, ClothesComponent.Hat, 185, 0),
+
+            //prsn FEMALE
+
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Masks, 212, 0),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Masks, 212, 1),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Masks, 212, 2),
+
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Undershort, 240, 0),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Undershort, 240, 1),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Undershort, 240, 2),
+
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Legs, 159, 0),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Legs, 159, 3),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Legs, 159, 4),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Legs, 162, 0),
+
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Accessories, 139, 0),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Accessories, 140, 0),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Accessories, 141, 0),
+
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Tops, 441, 9),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Tops, 442, 9),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Tops, 450, 6),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Tops, 451, 0),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Tops, 451, 1),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Tops, 452, 0),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Tops, 453, 0),
+
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Decals, 137, 0),
+
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Hat, 163, 0),
+            new ClothingSetData(0, Fractions.PRISON, ClothesComponent.Hat, 164, 0),
         };
     }
 }

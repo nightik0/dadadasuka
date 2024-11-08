@@ -60,6 +60,7 @@ namespace NeptuneEvo.Character.Save
                     .Set(v => v.Work, characterData.WorkID)
                     .Set(v => v.Drugaddi, characterData.DrugsAddiction)
                     .Set(v => v.Arrest, characterData.ArrestTime)
+                    .Set(v => v.ArrestType, characterData.ArrestType)
                     .Set(v => v.Wanted, JsonConvert.SerializeObject(characterData.WantedLVL))
                     .Set(v => v.Biz, JsonConvert.SerializeObject(characterData.BizIDs))
                     .Set(v => v.Licenses, JsonConvert.SerializeObject(characterData.Licenses))

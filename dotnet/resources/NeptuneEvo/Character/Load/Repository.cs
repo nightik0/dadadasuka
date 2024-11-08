@@ -86,6 +86,7 @@ namespace NeptuneEvo.Character.Load
                         WorkID = (int)character.Work,
                         DrugsAddiction = Convert.ToUInt16(character.Drugaddi),
                         ArrestTime = (int)character.Arrest,
+                        ArrestType = characterData.ArrestType,
                         DemorganTime = (int)character.Demorgan,
                         AdminLVL = (int)character.Adminlvl,
                         Unwarn = (DateTime)character.Unwarn,

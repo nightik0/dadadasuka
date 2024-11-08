@@ -34,55 +34,55 @@ using NeptuneEvo.VehicleData.LocalData.Models;
 
 namespace NeptuneEvo.Fractions
 {
-    class Police : Script
+    class Prison : Script
     {
-        private static readonly nLog Log = new nLog("Fractions.Police");
+        private static readonly nLog Log = new nLog("Fractions.Prison");
 
         private static int PedSecretaryId = 0;
 
         public static Dictionary<string, (string, string)> WantedVehicles = new Dictionary<string, (string, string)>();
 
-        public static Dictionary<ExtPlayer, ExtBlip> PoliceCalls = new Dictionary<ExtPlayer, ExtBlip>();//ToDo
-        public static Dictionary<int, ExtBlip> PoliceHouseCalls = new Dictionary<int, ExtBlip>();//ToDo
-        public static Dictionary<int, ExtBlip> PoliceCarsCalls = new Dictionary<int, ExtBlip>();//ToDo
-        public static Dictionary<int, ExtBlip> PoliceSafesCalls = new Dictionary<int, ExtBlip>();//ToDo
+        public static Dictionary<ExtPlayer, ExtBlip> PrisonCalls = new Dictionary<ExtPlayer, ExtBlip>();//ToDo
+        public static Dictionary<int, ExtBlip> PrisonHouseCalls = new Dictionary<int, ExtBlip>();//ToDo
+        public static Dictionary<int, ExtBlip> PrisonCarsCalls = new Dictionary<int, ExtBlip>();//ToDo
+        public static Dictionary<int, ExtBlip> PrisonSafesCalls = new Dictionary<int, ExtBlip>();//ToDo
 
-        private static Vector3 ArrestPosition = new Vector3(481.40088, -1010.83453, 26.273132);
-        public static Vector3 GunsPosition = new Vector3(479.0797, -996.76697, 30.69196);
-        public static Vector3 CloakroomPosition = new Vector3(463.51648, -996.40875, 30.68949);
-        private static Vector3 CloakroomSpecialPosition = new Vector3(463.5043, -999.32587, 30.68949);
-        public static Vector3 PrisonPosition = new Vector3(480.95743, -1014.3073, 26.27313);
-        public static Vector3 ExitPrisonPosition = new Vector3(477.8819, -976.16113, 27.98412);
-        private static Vector3 StockPosition = new Vector3(486.9647, -995.9626, 30.68962);
-        private static Vector3 VehicleBoostPosition = new Vector3(1408.2571, 183.5331, -49.280865);//463.32733, -1019.0836, 28.10166
-        private static Vector3 VehicleRepairPosition = new Vector3(447.07394, -1013.2826, 28.541023);
-        
+        public static Vector3 ArrestPosition = new Vector3(1688.4508, 2584.442, 45.908012);
+        public static Vector3 ArrestPositionnow = new Vector3(1688.4508, 2584.442, 45.908012);
+        public static Vector3 GunsPosition = new Vector3(1783.8416, 2543.3865, 45.797993);
+        public static Vector3 CloakroomPosition = new Vector3(1841.9807, 2573.0173, 45.885365);
+        private static Vector3 CloakroomSpecialPosition = new Vector3(-463.5043, -999.32587, -230.68949);
+        public static Vector3 PrisonPosition = new Vector3(1687.8185, 2446.0327, 45.602978);
+        public static Vector3 ExitPrisonPosition = new Vector3(1860.4487, 2587.5596, 45.672188);
+        private static Vector3 StockPosition = new Vector3(1777.9624, 2542.8567, 45.797993);
+        private static Vector3 VehicleBoostPosition = new Vector3(1408.2571, -183.5331, -409.280865);
+        private static Vector3 VehicleRepairPosition = new Vector3(447.07394, -1013.2826, -207.041023);
+
 
         [ServerEvent(Event.ResourceStart)]
         public void onResourceStart()
         {
             try
             {
-                Main.CreateBlip(new Main.BlipData(526, "Police", GunsPosition, 38, true));
+                CustomColShape.CreateCylinderColShape(PrisonPosition, 200, 20, 0, ColShapeEnums.FractionPrisonPosition, 3);
+                CustomColShape.CreateCylinderColShape(ArrestPositionnow, 6, 3, 0, ColShapeEnums.FractionPrisonArrest, 3);
+                //CustomColShape.CreateCylinderColShape(PrisonCheckpoints[1], 1, 2, 0, ColShapeEnums.FractionPrison, 1);
 
-                CustomColShape.CreateCylinderColShape(ArrestPosition, 6, 3, 0, ColShapeEnums.FractionPolicArrest, 0);
-                //CustomColShape.CreateCylinderColShape(policeCheckpoints[1], 1, 2, 0, ColShapeEnums.FractionPolic, 1);
-
-                CustomColShape.CreateCylinderColShape(CloakroomPosition, 1, 2, 0, ColShapeEnums.FractionPolic, 2);
+                CustomColShape.CreateCylinderColShape(CloakroomPosition, 1, 2, 0, ColShapeEnums.FractionPrison, 2);
                 NAPI.Marker.CreateMarker(30, CloakroomPosition, new Vector3(), new Vector3(), 1, new Color(255, 255, 255, 220));
 
-                CustomColShape.CreateCylinderColShape(CloakroomSpecialPosition, 1, 2, 0, ColShapeEnums.FractionPolic, 3);
+                CustomColShape.CreateCylinderColShape(CloakroomSpecialPosition, 1, 2, 0, ColShapeEnums.FractionPrison, 3);
                 NAPI.Marker.CreateMarker(30, CloakroomSpecialPosition, new Vector3(), new Vector3(), 1, new Color(255, 255, 255, 220));
 
-                //CustomColShape.CreateCylinderColShape(policeCheckpoints[7], 1, 2, 0, ColShapeEnums.FractionPolic, 4);
-                CustomColShape.CreateCylinderColShape(StockPosition, 1, 2, 0, ColShapeEnums.FractionPolic, 5);
+                //CustomColShape.CreateCylinderColShape(PrisonCheckpoints[7], 1, 2, 0, ColShapeEnums.FractionPrison, 4);
+                CustomColShape.CreateCylinderColShape(StockPosition, 1, 2, 0, ColShapeEnums.FractionPrison, 5);
                 NAPI.Marker.CreateMarker(20, StockPosition, new Vector3(), new Vector3(), 1, new Color(255, 255, 255, 220));
 
-                CustomColShape.CreateCylinderColShape(VehicleBoostPosition, 3, 5, 1, ColShapeEnums.FractionPolic, 6);
+                CustomColShape.CreateCylinderColShape(VehicleBoostPosition, 3, 5, 1, ColShapeEnums.FractionPrison, 6);
                 NAPI.Marker.CreateMarker(44, VehicleBoostPosition, new Vector3(), new Vector3(), 1, new Color(255, 255, 255, 220), dimension: 1);
 
-                
-                CustomColShape.CreateCylinderColShape(VehicleRepairPosition, 3, 5, 0, ColShapeEnums.FractionPolic, 9); // repair
+
+                CustomColShape.CreateCylinderColShape(VehicleRepairPosition, 3, 5, 0, ColShapeEnums.FractionPrison, 9); // repair
                 NAPI.Marker.CreateMarker(1, new Vector3(VehicleRepairPosition.X, VehicleRepairPosition.Y, VehicleRepairPosition.Z - 1.75), new Vector3(), new Vector3(), 3f, new Color(255, 255, 255, 220));
                 NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~w~Ремонт наземного транспорта"), VehicleRepairPosition, 5F, 0.3F, 0, new Color(255, 255, 255));
 
@@ -90,48 +90,48 @@ namespace NeptuneEvo.Fractions
                 PedSecretaryId = ped.Value;
 
                 PedSystem.Repository.CreateQuest("s_m_m_fibsec_01", new Vector3(480.34195, -996.7015, 30.690102), 88.88336f, title: "~y~NPC~w~ Агент Роберт\nСкладской", colShapeEnums: ColShapeEnums.FracPolic);
-                PedSystem.Repository.CreateQuest("s_f_y_cop_01", new Vector3(442.5702, -978.62854, 30.689486), 100.0675f, title: "~y~NPC~w~ Офицер Лиса\nВызвать сотрудника", colShapeEnums: ColShapeEnums.CallPoliceMember);
+                PedSystem.Repository.CreateQuest("s_f_y_cop_01", new Vector3(442.5702, -978.62854, 30.689486), 100.0675f, title: "~y~NPC~w~ Офицер Лиса\nВызвать сотрудника", colShapeEnums: ColShapeEnums.CallPrisonMember);
             }
             catch (Exception e)
             {
                 Log.Write($"onResourceStart Exception: {e.ToString()}");
             }
         }
-        
-        [Interaction(ColShapeEnums.CallPoliceMember)] 
-        public static void OpenCallPoliceMemberDialog(ExtPlayer player, int _) 
-        { 
-            try 
-            { 
-                var sessionData = player.GetSessionData(); 
-                if (sessionData == null) return; 
- 
-                if (sessionData.CuffedData.Cuffed) 
-                { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000); 
-                    return; 
-                } 
-                else if (sessionData.DeathData.InDeath) 
-                { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000); 
-                    return; 
-                } 
-                else if (Main.IHaveDemorgan(player, true)) return; 
- 
-                Trigger.ClientEvent(player, "openDialog", "CallPoliceMemberDialog", LangFunc.GetText(LangType.Ru, DataName.AreYouWantToCallGov)); 
-            } 
-            catch (Exception e) 
-            { 
-                Log.Write($"OpenCallPoliceMemberDialog Exception: {e.ToString()}"); 
-            } 
+
+        [Interaction(ColShapeEnums.CallPrisonMember)]
+        public static void OpenCallPrisonMemberDialog(ExtPlayer player, int _)
+        {
+            try
+            {
+                var sessionData = player.GetSessionData();
+                if (sessionData == null) return;
+
+                if (sessionData.CuffedData.Cuffed)
+                {
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    return;
+                }
+                else if (sessionData.DeathData.InDeath)
+                {
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    return;
+                }
+                else if (Main.IHaveDemorgan(player, true)) return;
+
+                Trigger.ClientEvent(player, "openDialog", "CallPrisonMemberDialog", LangFunc.GetText(LangType.Ru, DataName.AreYouWantToCallGov));
+            }
+            catch (Exception e)
+            {
+                Log.Write($"OpenCallPrisonMemberDialog Exception: {e.ToString()}");
+            }
         }
-        
+
         [Interaction(ColShapeEnums.FracPolic)]
         public static void Open(ExtPlayer player, int index)
         {
             var sessionData = player.GetSessionData();
             if (sessionData == null) return;
-            
+
             if (sessionData.CuffedData.Cuffed)
             {
                 Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
@@ -152,7 +152,7 @@ namespace NeptuneEvo.Fractions
             else
             {
                 var fractionData = player.GetFractionData();
-                if (fractionData == null || fractionData.Id != (int) Models.Fractions.POLICE)
+                if (fractionData == null || fractionData.Id != (int)Models.Fractions.PRISON)
                 {
                     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoPolice), 3000);
                     return;
@@ -167,7 +167,7 @@ namespace NeptuneEvo.Fractions
                     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000);
                     return;
                 }
-                OpenPoliceGunMenu(player);
+                OpenPrisonGunMenu(player);
                 return;
             }
         }
@@ -183,7 +183,7 @@ namespace NeptuneEvo.Fractions
             }
             Chars.Repository.RemoveIndex(player, "accessories", 8);
             MoneySystem.Wallet.Change(player, Main.PoliceAward);
-            GameLog.Money($"server", $"player({characterData.UUID})", Main.PoliceAward, $"policeAward");
+            GameLog.Money($"server", $"player({characterData.UUID})", Main.PoliceAward, $"PrisonAward");
             Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Reward, Main.PoliceAward), 3000);
             return;
         }
@@ -205,36 +205,36 @@ namespace NeptuneEvo.Fractions
             }
         }
 
-        public static string OnCallPolice(ExtPlayer player, string reason)
+        public static string OnCallPrison(ExtPlayer player, string reason)
         {
             try
             {
                 var sessionData = player.GetSessionData();
-                if (sessionData == null) 
+                if (sessionData == null)
                     return "Что то не так :-(";
                 var characterData = player.GetCharacterData();
-                if (characterData == null) 
+                if (characterData == null)
                     return "Что то не так :-(";
-                if (PoliceCalls.ContainsKey(player)) 
+                if (PrisonCalls.ContainsKey(player))
                     return "Вы уже сделали вызов";
 
-                if (Manager.FractionMembersCount(new [] {(int) Models.Fractions.POLICE, (int) Models.Fractions.FIB, (int) Models.Fractions.SHERIFF}) == 0)
+                if (Manager.FractionMembersCount(new[] { (int)Models.Fractions.PRISON, (int)Models.Fractions.FIB, (int)Models.Fractions.SHERIFF }) == 0)
                     return LangFunc.GetText(LangType.Ru, DataName.NoPoliceNear);
-                
+
                 if (characterData.AdminLVL == 0 && DateTime.Now < sessionData.TimingsData.NextCallPolice)
                     return LangFunc.GetText(LangType.Ru, DataName.AlreadyCallPolice);
-                
+
                 if (characterData.Unmute > 0)
                 {
                     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
                     return "К сожалению, мы не можем принять ваш вызов :(";
                 }
-                
+
                 sessionData.TimingsData.NextCallPolice = DateTime.Now.AddMinutes(7);
 
-                var blip = (ExtBlip)NAPI.Blip.CreateBlip(0, player.Position, 1, 70, $"Police Call from {player.Name.Replace('_', ' ')} [{player.Value}]", 0, 0, true, 0, 0);
+                var blip = (ExtBlip)NAPI.Blip.CreateBlip(0, player.Position, 1, 70, $"Prison Call from {player.Name.Replace('_', ' ')} [{player.Value}]", 0, 0, true, 0, 0);
                 blip.Transparency = 0;
-                PoliceCalls.Add(player, blip);
+                PrisonCalls.Add(player, blip);
 
                 NAPI.Task.Run(() =>
                 {
@@ -244,37 +244,37 @@ namespace NeptuneEvo.Fractions
                     }
                     catch (Exception e)
                     {
-                        Log.Write($"OnCallPolice Task Exception: {e.ToString()}");
+                        Log.Write($"OnCallPrison Task Exception: {e.ToString()}");
                     }
                 }, 60000);
 
                 foreach (var foreachPlayer in Character.Repository.GetPlayers())
                 {
                     var foreachMemberFractionData = foreachPlayer.GetFractionMemberData();
-                    if (foreachMemberFractionData == null) 
+                    if (foreachMemberFractionData == null)
                         continue;
-                    
+
                     if (!Configs.IsFractionPolic(foreachMemberFractionData.Id))
                         continue;
-                    
+
                     Trigger.ClientEvent(foreachPlayer, "changeBlipAlpha", blip, 255);
                 }
-                //Manager.sendFractionMessage((int) Models.Fractions.Models.Fractions.POLICE, $"Поступил вызов от ({player.Value}) - {reason}");
-                Manager.sendFractionMessage((int) Models.Fractions.POLICE, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.PoliceCallFrom, player.Name, player.Value, reason), true);
+                //Manager.sendFractionMessage((int) Models.Fractions.Models.Fractions.Prison, $"Поступил вызов от ({player.Value}) - {reason}");
+                Manager.sendFractionMessage((int)Models.Fractions.PRISON, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.PoliceCallFrom, player.Name, player.Value, reason), true);
                 //Manager.sendFractionMessage(9, $"Поступил вызов от ({player.Value}) - {reason}");
-                Manager.sendFractionMessage((int) Models.Fractions.FIB, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.PoliceCallFrom, player.Name, player.Value, reason), true);
-                Manager.sendFractionMessage((int) Models.Fractions.SHERIFF, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.PoliceCallFrom, player.Name, player.Value, reason), true);
+                Manager.sendFractionMessage((int)Models.Fractions.FIB, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.PoliceCallFrom, player.Name, player.Value, reason), true);
+                Manager.sendFractionMessage((int)Models.Fractions.SHERIFF, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.PoliceCallFrom, player.Name, player.Value, reason), true);
 
-                if (characterData.Gender) 
+                if (characterData.Gender)
                     Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.HeCallPolice));
-                else 
+                else
                     Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.SheCallPolice));
-                
+
                 return "Вызов принят";
             }
             catch (Exception e)
             {
-                Log.Write($"OnCallPolice Exception: {e.ToString()}");
+                Log.Write($"OnCallPrison Exception: {e.ToString()}");
             }
             return "Что то не так :-(";
         }
@@ -296,24 +296,24 @@ namespace NeptuneEvo.Fractions
 
                 ExtPlayer target = Main.GetPlayerByID(id);
 
-                if (target != null && target.IsCharacterData() && PoliceCalls.ContainsKey(target))
+                if (target != null && target.IsCharacterData() && PrisonCalls.ContainsKey(target))
                 {
-                    Blip blip = PoliceCalls[target];
+                    Blip blip = PrisonCalls[target];
                     if (blip != null && blip.Exists) Trigger.ClientEvent(player, "createWaypoint", blip.Position.X, blip.Position.Y);
 
                     if (Configs.IsFractionPolic(fracId))
                     {
-                        Manager.sendFractionMessage(fracId, LangFunc.GetText(LangType.Ru, DataName.CallAccept, player.Name.Replace("_"," "), target.Value));
-                        Manager.sendFractionMessage(fracId, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.CallAccept, player.Name.Replace("_"," "), target.Value), true);
+                        Manager.sendFractionMessage(fracId, LangFunc.GetText(LangType.Ru, DataName.CallAccept, player.Name.Replace("_", " "), target.Value));
+                        Manager.sendFractionMessage(fracId, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.CallAccept, player.Name.Replace("_", " "), target.Value), true);
                         player.AddTableScore(TableTaskId.Item5);
                     }
 
                     Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCallAccepted, player.Value), 3000);
                 }
-                else if (PoliceHouseCalls.ContainsKey(id))
+                else if (PrisonHouseCalls.ContainsKey(id))
                 {
-                    Blip blip = PoliceHouseCalls[id];
-                
+                    Blip blip = PrisonHouseCalls[id];
+
                     if (blip != null && blip.Exists)
                     {
                         Trigger.ClientEvent(player, "changeBlipAlpha", blip, 255);
@@ -327,10 +327,10 @@ namespace NeptuneEvo.Fractions
                         player.AddTableScore(TableTaskId.Item5);
                     }
                 }
-                else if (PoliceCarsCalls.ContainsKey(id))
+                else if (PrisonCarsCalls.ContainsKey(id))
                 {
-                    Blip blip = PoliceCarsCalls[id];
-                
+                    Blip blip = PrisonCarsCalls[id];
+
                     if (blip != null && blip.Exists)
                     {
                         Trigger.ClientEvent(player, "changeBlipAlpha", blip, 255);
@@ -345,10 +345,10 @@ namespace NeptuneEvo.Fractions
                         player.AddTableScore(TableTaskId.Item8);
                     }
                 }
-                else if (PoliceSafesCalls.ContainsKey(id))
+                else if (PrisonSafesCalls.ContainsKey(id))
                 {
-                    Blip blip = PoliceSafesCalls[id];
-                
+                    Blip blip = PrisonSafesCalls[id];
+
                     if (blip != null && blip.Exists)
                     {
                         Trigger.ClientEvent(player, "createWaypoint", blip.Position.X, blip.Position.Y);
@@ -424,7 +424,7 @@ namespace NeptuneEvo.Fractions
 
                             await db.Characters
                                 .Where(v => v.Uuid == tauuid)
-                                .Set(v => v.Wanted, (string) null)
+                                .Set(v => v.Wanted, (string)null)
                                 .UpdateAsync();
                         }
                         catch (Exception e)
@@ -432,18 +432,18 @@ namespace NeptuneEvo.Fractions
                             Debugs.Repository.Exception(e);
                         }
                     });
-                    
+
                     setPlayerWantedLevel(player, null);
                     Notify.Send(sender, NotifyType.Success, NotifyPosition.TopCenter, LangFunc.GetText(LangType.Ru, DataName.YouRemoveWantedPass, target), 3000);
                     Fractions.Table.Logs.Repository.AddLogs(sender, FractionLogsType.Su, $"Снял розыск с {target} ({tauuid})");
-                    
+
                     foreach (var foreachPlayer in Character.Repository.GetPlayers())
                     {
                         var foreachMemberFractionData = foreachPlayer.GetFractionMemberData();
-                        if (foreachMemberFractionData == null) 
+                        if (foreachMemberFractionData == null)
                             continue;
-                        
-                        if (foreachMemberFractionData.Id == (int) Models.Fractions.POLICE || foreachMemberFractionData.Id == (int) Models.Fractions.FIB)
+
+                        if (foreachMemberFractionData.Id == (int)Models.Fractions.PRISON || foreachMemberFractionData.Id == (int)Models.Fractions.FIB)
                             Trigger.SendChatMessage(foreachPlayer, "!{#FF8C00}" + LangFunc.GetText(LangType.Ru, DataName.RemoveWantedFrom, sender.Name, target));
                     }
                 }
@@ -455,10 +455,10 @@ namespace NeptuneEvo.Fractions
                         foreach (var foreachPlayer in Character.Repository.GetPlayers())
                         {
                             var foreachMemberFractionData = foreachPlayer.GetFractionMemberData();
-                            if (foreachMemberFractionData == null) 
+                            if (foreachMemberFractionData == null)
                                 continue;
-                            
-                            if (Configs.IsFractionPolic(foreachMemberFractionData.Id)) 
+
+                            if (Configs.IsFractionPolic(foreachMemberFractionData.Id))
                                 Trigger.ClientEvent(foreachPlayer, "clearVehicleWanted", vehiclenumb);
                         }
                         Notify.Send(sender, NotifyType.Success, NotifyPosition.TopCenter, LangFunc.GetText(LangType.Ru, DataName.YouRemoveWantedVeh, vehiclenumb), 3000);
@@ -538,7 +538,7 @@ namespace NeptuneEvo.Fractions
 
                     int wantedLvl = (targetCharacterData.WantedLVL == null) ? 0 : targetCharacterData.WantedLVL.Level;
                     string gender = (targetCharacterData.Gender) ? LangFunc.GetText(LangType.Ru, DataName.Mans) : LangFunc.GetText(LangType.Ru, DataName.Womens);
-                    
+
                     string lic = "";
                     for (int i = 0; i < targetCharacterData.Licenses.Count; i++) if (targetCharacterData.Licenses[i]) lic += $"{Main.LicWords[i]} / ";
                     if (lic == "") lic = LangFunc.GetText(LangType.Ru, DataName.Nothing);
@@ -546,7 +546,7 @@ namespace NeptuneEvo.Fractions
                     string houseInfo = "-";
                     House house = HouseManager.GetHouse($"{targetCharacterData.FirstName}_{targetCharacterData.LastName}", true);
                     if (house != null) houseInfo = $"#{house.ID}";
-                    
+
                     Trigger.ClientEvent(player, "executePersonInfo", $"{targetCharacterData.FirstName}", $"{targetCharacterData.LastName}", $"{targetCharacterData.UUID}", $"{fraction_name}", $"{numberInfo}", $"{gender}", $"{wantedLvl}", $"{lic}", $"{houseInfo}");
                 }
                 catch
@@ -584,37 +584,37 @@ namespace NeptuneEvo.Fractions
                                 Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Человек не найден", 3000);
                                 return;
                             }
-                                                        
+
                             var genderBool = Convert.ToBoolean(character.Gender);
                             var gender = (genderBool) ? LangFunc.GetText(LangType.Ru, DataName.Mans) : LangFunc.GetText(LangType.Ru, DataName.Womens);
 
                             var fraction_name = "Отсутствует";
-                            
+
                             var memberFractionData = Fractions.Manager.GetFractionMemberData(character.Uuid);
                             if (memberFractionData != null)
                                 fraction_name = Manager.FractionNames[memberFractionData.Id];
-                            
+
                             var sim = Convert.ToInt32(character.Sim);
-                            
+
                             var numberInfo = sim == -1 ? "Отсутствует" : sim.ToString();
 
                             var wanted = JsonConvert.DeserializeObject<WantedLevel>(character.Wanted);
                             var wantedLvl = (wanted == null) ? 0 : wanted.Level;
-                            
+
                             var licenses = JsonConvert.DeserializeObject<List<bool>>(character.Licenses);
                             var lic = "";
-                            for (var i = 0; i < licenses.Count; i++) 
-                                if (licenses[i]) 
+                            for (var i = 0; i < licenses.Count; i++)
+                                if (licenses[i])
                                     lic += $"{Main.LicWords[i]} / ";
                             if (lic == "") lic = LangFunc.GetText(LangType.Ru, DataName.Nothing);
 
                             var houseInfo = "-";
                             var house = HouseManager.GetHouse($"{character.Firstname}_{character.Lastname}", true);
-                            if (house != null) 
+                            if (house != null)
                                 houseInfo = $"#{house.ID}";
 
                             Trigger.ClientEvent(player, "executePersonInfo", $"{character.Firstname}", $"{character.Lastname}", $"{character.Uuid}", $"{fraction_name}", $"{numberInfo}", $"{gender}", $"{wantedLvl}", $"{lic}", $"{houseInfo}");
-                    
+
                         }
                         catch
                         {
@@ -728,20 +728,20 @@ namespace NeptuneEvo.Fractions
                 player.Eval($"mp.game.audio.playSoundFrontend(-1, \"Mission_Pass_Notify\", \"DLC_HEISTS_GENERAL_FRONTEND_SOUNDS\", true);");
 
                 characterData.ArrestTime = Convert.ToInt32(((characterData.WantedLVL.Level >= 5) ? 3600 : (characterData.WantedLVL.Level * 10 * 60)) / 2);
-                
+
                 if (player.Position.DistanceTo(Sheriff.FirstPrisonPosition) <= 150) characterData.ArrestType = 1;
                 else if (player.Position.DistanceTo(Sheriff.SecondPrisonPosition) <= 150) characterData.ArrestType = 2;
                 else if (player.Position.DistanceTo(PrisonPosition) <= 150) characterData.ArrestType = 3;
                 else characterData.ArrestType = 0;
-                
+
                 int minutes = Convert.ToInt32(characterData.ArrestTime / 60);
                 Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouArrested, minutes), 3000);
 
                 FractionCommands.arrestPlayer(player);
 
-                Manager.sendFractionMessage((int) Models.Fractions.POLICE, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.PoliceSdalsya, player.Name, minutes), true);
-                Manager.sendFractionMessage((int) Models.Fractions.SHERIFF, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.PoliceSdalsya, player.Name, minutes), true);
-                Manager.sendFractionMessage((int) Models.Fractions.FIB, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.PoliceSdalsya, player.Name, minutes), true);
+                Manager.sendFractionMessage((int)Models.Fractions.PRISON, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.PoliceSdalsya, player.Name, minutes), true);
+                Manager.sendFractionMessage((int)Models.Fractions.SHERIFF, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.PoliceSdalsya, player.Name, minutes), true);
+                Manager.sendFractionMessage((int)Models.Fractions.FIB, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.PoliceSdalsya, player.Name, minutes), true);
                 Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.Arrest, $"{player.Name} ({characterData.UUID}) сдался с поличным и был посажен в КПЗ на {minutes} минут.");
             }
             catch (Exception e)
@@ -822,7 +822,7 @@ namespace NeptuneEvo.Fractions
             //{ ItemId.SniperAmmo, 1 },
             //{ ItemId.ShotgunsAmmo, 1 }
         };
-        
+
         public static readonly Dictionary<int, int> WeaponsMaxHP = new Dictionary<int, int>
         {
             /* Pistols */
@@ -894,7 +894,7 @@ namespace NeptuneEvo.Fractions
             { 159, 9999},
             { 160, 9999},
             { 161, 9999},
-            { 162, 9999} 
+            { 162, 9999}
         };
 
         public static void TakeIllegalStuff(ExtPlayer player)
@@ -923,11 +923,11 @@ namespace NeptuneEvo.Fractions
                             {
                                 if (itemData.Value.ItemId == ItemId.Debug || itemData.Value.ItemId == ItemId.Wrench || itemData.Value.ItemId == ItemId.Flashlight || itemData.Value.ItemId == ItemId.Ball || itemData.Value.ItemId == ItemId.Bag) continue;
 
-                                if (itemData.Value.Data.Contains("_") && WeaponsMaxHP.ContainsKey((int) itemData.Value.ItemId))
+                                if (itemData.Value.Data.Contains("_") && WeaponsMaxHP.ContainsKey((int)itemData.Value.ItemId))
                                 {
                                     int weaponHP = Convert.ToInt32(itemData.Value.Data.Split("_")[1]);
-                                    int condition = Convert.ToInt32(((double) weaponHP / WeaponsMaxHP[(int) itemData.Value.ItemId]) * 100);
-                                    if (condition < 20) continue; 
+                                    int condition = Convert.ToInt32(((double)weaponHP / WeaponsMaxHP[(int)itemData.Value.ItemId]) * 100);
+                                    if (condition < 20) continue;
                                 }
 
                                 InventoryItemData item = itemData.Value;
@@ -952,9 +952,9 @@ namespace NeptuneEvo.Fractions
                     MoneySystem.Wallet.Change(player, rewardSumm);
                     GameLog.Money($"server", $"player({characterData.UUID})", rewardSumm, $"TakeIllegalStuff({rewardSumm})");
                     Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucSdalNelegal, rewardSumm), 3000);
-                    Manager.sendFractionMessage((int) Models.Fractions.POLICE, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.SdalNelegal, player.Name, rewardSumm), true);
-                    Manager.sendFractionMessage((int) Models.Fractions.SHERIFF, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.SdalNelegal, player.Name, rewardSumm), true);
-                    Manager.sendFractionMessage((int) Models.Fractions.FIB, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.SdalNelegal, player.Name, rewardSumm), true);
+                    Manager.sendFractionMessage((int)Models.Fractions.PRISON, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.SdalNelegal, player.Name, rewardSumm), true);
+                    Manager.sendFractionMessage((int)Models.Fractions.SHERIFF, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.SdalNelegal, player.Name, rewardSumm), true);
+                    Manager.sendFractionMessage((int)Models.Fractions.FIB, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.SdalNelegal, player.Name, rewardSumm), true);
                 }
                 else
                 {
@@ -986,23 +986,23 @@ namespace NeptuneEvo.Fractions
                 Log.Write($"Event_PlayerDeath Exception: {e.ToString()}");
             }
         }
-        
-        [Interaction(ColShapeEnums.FractionPolic)]
+
+        [Interaction(ColShapeEnums.FractionPrison)]
         public static void OnFractionPolic(ExtPlayer player, int interact)
         {
             try
             {
                 var sessionData = player.GetSessionData();
                 if (sessionData == null) return;
-              
+
 
                 var fractionData = player.GetFractionData();
-                if (fractionData == null || fractionData.Id != (int) Models.Fractions.POLICE)
+                if (fractionData == null || fractionData.Id != (int)Models.Fractions.PRISON)
                 {
                     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoPolice), 3000);
                     return;
                 }
-                
+
                 switch (interact)
                 {
                     case 2:
@@ -1019,7 +1019,7 @@ namespace NeptuneEvo.Fractions
                             Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoEmergency), 3000);
                             return;
                         }
-                        OpenSpecialPoliceMenu(player);
+                        OpenSpecialPrisonMenu(player);
                         return;
                     /*case 5:
                         if (characterData.Licenses[6])
@@ -1048,8 +1048,8 @@ namespace NeptuneEvo.Fractions
                             return;
                         }
                         if (!player.IsFractionAccess(RankToAccess.OpenWeaponStock)) return;
-                        sessionData.OnFracStock = 7;
-                        Chars.Repository.LoadOtherItemsData(player, "Fraction", "7", 5, Chars.Repository.InventoryMaxSlots["Fraction"]);
+                        sessionData.OnFracStock = 17;
+                        Chars.Repository.LoadOtherItemsData(player, "Fraction", "17", 5, Chars.Repository.InventoryMaxSlots["Fraction"]);
                         return;
                     case 6:
                         if (!sessionData.WorkData.OnDuty)
@@ -1057,8 +1057,8 @@ namespace NeptuneEvo.Fractions
                             Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000);
                             return;
                         }
-                        if (!player.IsInVehicle || (player.Vehicle.Model != NAPI.Util.GetHashKey("police") &&
-                            player.Vehicle.Model != NAPI.Util.GetHashKey("police2") && player.Vehicle.Model != NAPI.Util.GetHashKey("police3") && player.Vehicle.Model != NAPI.Util.GetHashKey("police4")))
+                        if (!player.IsInVehicle || (player.Vehicle.Model != NAPI.Util.GetHashKey("Prison") &&
+                            player.Vehicle.Model != NAPI.Util.GetHashKey("Prison2") && player.Vehicle.Model != NAPI.Util.GetHashKey("Prison3") && player.Vehicle.Model != NAPI.Util.GetHashKey("Prison4")))
                         {
                             Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustCarPolice), 3000);
                             return;
@@ -1088,14 +1088,14 @@ namespace NeptuneEvo.Fractions
                             if (ticks <= 0) return;
                             DateTime g = new DateTime(ticks);
                             if (g.Hour >= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NextRepair1h, g.Hour, g.Minute, g.Second), 3000);
-                            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NextRepair,  g.Minute, g.Second), 3000);
+                            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NextRepair, g.Minute, g.Second), 3000);
                             return;
                         }
                         var vehicle = (ExtVehicle)player.Vehicle;
                         var vehicleLocalData = vehicle.GetVehicleLocalData();
                         if (vehicleLocalData != null)
                         {
-                            if (vehicleLocalData.Access == VehicleAccess.Fraction && vehicleLocalData.Fraction == (int) Models.Fractions.POLICE)
+                            if (vehicleLocalData.Access == VehicleAccess.Fraction && vehicleLocalData.Fraction == (int)Models.Fractions.PRISON)
                             {
                                 Main.NextFixcarPoliceVeh = DateTime.Now.AddMinutes(3);
                                 VehicleManager.RepairCar(vehicle);
@@ -1121,8 +1121,38 @@ namespace NeptuneEvo.Fractions
         }
 
         #region shapes
-        [Interaction(ColShapeEnums.FractionPolicArrest, In: true)]
-        public static void InFractionPolicArrest(ExtPlayer player, int index)
+        [Interaction(ColShapeEnums.FractionPrisonPosition, In: true)]
+        public static void InFractionPrisonPosition(ExtPlayer player, int index)
+        {
+            try
+            {
+                var sessionData = player.GetSessionData();
+                if (sessionData == null) return;
+            }
+            catch (Exception e)
+            {
+                Log.Write($"InFractionPrisonPosition Exception: {e.ToString()}");
+            }
+        }
+        [Interaction(ColShapeEnums.FractionPrisonPosition, Out: true)]
+        public static void OutFractionPrisonPosition(ExtPlayer player)
+        {
+            try
+            {
+                var sessionData = player.GetSessionData();
+                if (sessionData == null) return;
+                var characterData = player.GetCharacterData();
+                if (characterData == null) return;
+                if (characterData.ArrestTime != 0) player.Position = PrisonPosition;
+            }
+            catch (Exception e)
+            {
+                Log.Write($"OutFractionPrisonPosition Exception: {e.ToString()}");
+            }
+        }
+ 
+        [Interaction(ColShapeEnums.FractionPrisonArrest, In: true)]
+        public static void InFractionPrisonArrest(ExtPlayer player, int index)
         {
             try
             {
@@ -1132,11 +1162,11 @@ namespace NeptuneEvo.Fractions
             }
             catch (Exception e)
             {
-                Log.Write($"InFractionPolicArrest Exception: {e.ToString()}");
+                Log.Write($"InFractionPrisonArrest Exception: {e.ToString()}");
             }
         }
-        [Interaction(ColShapeEnums.FractionPolicArrest, Out: true)]
-        public static void OutFractionPolicArrest(ExtPlayer player)
+        [Interaction(ColShapeEnums.FractionPrisonArrest, Out: true)]
+        public static void OutFractionPrisonArrest(ExtPlayer player)
         {
             try
             {
@@ -1145,13 +1175,13 @@ namespace NeptuneEvo.Fractions
                 sessionData.InArrestArea = -1;
                 var characterData = player.GetCharacterData();
                 if (characterData == null) return;
-                if (characterData.ArrestTime != 0) player.Position = PrisonPosition;
             }
             catch (Exception e)
             {
-                Log.Write($"OutFractionPolicArrest Exception: {e.ToString()}");
+                Log.Write($"OutFractionPrisonArrest Exception: {e.ToString()}");
             }
         }
+
         #endregion
 
         public static void onPlayerDisconnectedhandler(ExtPlayer player, DisconnectionType type, string reason)
@@ -1196,9 +1226,9 @@ namespace NeptuneEvo.Fractions
                 var characterData = player.GetCharacterData();
                 if (characterData == null) return;
                 characterData.WantedLVL = wantedlevel;
-                if (wantedlevel != null) 
+                if (wantedlevel != null)
                     Trigger.ClientEvent(player, "client.charStore.Wanted", wantedlevel.Level);
-                else 
+                else
                     Trigger.ClientEvent(player, "client.charStore.Wanted", 0);
             }
             catch (Exception e)
@@ -1210,19 +1240,19 @@ namespace NeptuneEvo.Fractions
         public static bool is_warg = false;
 
         #region menus
-        public static void OpenPoliceGunMenu(ExtPlayer player)
+        public static void OpenPrisonGunMenu(ExtPlayer player)
         {
             try
             {
                 if (!player.IsCharacterData()) return;
-                Manager.OpenFractionSM(player, "polic");
+                Manager.OpenFractionSM(player, "Prison");
             }
             catch (Exception e)
             {
-                Log.Write($"OpenPoliceGunMenu Exception: {e.ToString()}");
+                Log.Write($"OpenPrisonGunMenu Exception: {e.ToString()}");
             }
         }
-        public static void OpenSpecialPoliceMenu(ExtPlayer player)
+        public static void OpenSpecialPrisonMenu(ExtPlayer player)
         {
             try
             {
@@ -1241,7 +1271,7 @@ namespace NeptuneEvo.Fractions
                     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TooFarFromVidacha), 3000);
                     return;
                 }
-                if (player.GetFractionId() != (int) Models.Fractions.POLICE) return;
+                if (player.GetFractionId() != (int)Models.Fractions.PRISON) return;
 
                 if (!sessionData.InCpMode)
                 {
@@ -1250,7 +1280,7 @@ namespace NeptuneEvo.Fractions
                     //ClothesComponents.ClearClothes(player, gender);
                     if (gender)
                     {
-                        ClothesComponents.SetSpecialClothes(player, 0,  39, 0);
+                        ClothesComponents.SetSpecialClothes(player, 0, 39, 0);
                         //ClothesComponents.SetSpecialClothes(player, 1, 52, 0);
                         ClothesComponents.SetSpecialClothes(player, 11, 53, 0);
                         ClothesComponents.SetSpecialClothes(player, 4, 31, 0);
@@ -1259,7 +1289,7 @@ namespace NeptuneEvo.Fractions
                     }
                     else
                     {
-                        ClothesComponents.SetSpecialClothes(player, 0,  38, 0);
+                        ClothesComponents.SetSpecialClothes(player, 0, 38, 0);
                         //ClothesComponents.SetSpecialClothes(player, 1, 57, 0);
                         ClothesComponents.SetSpecialClothes(player, 11, 46, 0);
                         ClothesComponents.SetSpecialClothes(player, 4, 30, 0);
@@ -1275,7 +1305,7 @@ namespace NeptuneEvo.Fractions
             }
             catch (Exception e)
             {
-                Log.Write($"OpenSpecialPoliceMenu Exception: {e.ToString()}");
+                Log.Write($"OpenSpecialPrisonMenu Exception: {e.ToString()}");
             }
         }
         #endregion

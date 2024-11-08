@@ -76,6 +76,7 @@ namespace NeptuneEvo.Character.Create
                     Work = characterData.WorkID,
                     Drugaddi = characterData.DrugsAddiction,
                     Arrest = characterData.ArrestTime,
+                    ArrestType = characterData.ArrestType,
                     Demorgan = characterData.DemorganTime,
                     Wanted = JsonConvert.SerializeObject(characterData.WantedLVL),
                     Biz = JsonConvert.SerializeObject(characterData.BizIDs),

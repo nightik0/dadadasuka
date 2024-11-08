@@ -871,18 +871,18 @@ namespace NeptuneEvo.Fractions
                 targetSessionData.CuffedData.CuffedByCop = false;
                 targetSessionData.CuffedData.CuffedByMafia = false;
 
-                Commands.RPChat("sme", player, " поместил {name} в КПЗ", target);
-                Manager.sendFractionMessage((int) Models.Fractions.POLICE, "!{#FF8C00}[F] " + $"{player.Name} посадил в КПЗ {target.Name} ({targetCharacterData.WantedLVL.Reason})", true);
-                Manager.sendFractionMessage((int) Models.Fractions.SHERIFF, "!{#FF8C00}[F] " + $"{player.Name} посадил в КПЗ {target.Name} ({targetCharacterData.WantedLVL.Reason})", true);
-                Manager.sendFractionMessage((int) Models.Fractions.FIB, "!{#FF8C00}[F] " + $"{player.Name} посадил в КПЗ {target.Name} ({targetCharacterData.WantedLVL.Reason})", true);
-                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.Arrest, $"Посадил в КПЗ {target.Name} ({targetCharacterData.UUID})");
+                Commands.RPChat("sme", player, " посадил {name}", target);
+                Manager.sendFractionMessage((int) Models.Fractions.POLICE, "!{#FF8C00}[F] " + $"{player.Name} посадил {target.Name} ({targetCharacterData.WantedLVL.Reason})", true);
+                Manager.sendFractionMessage((int) Models.Fractions.SHERIFF, "!{#FF8C00}[F] " + $"{player.Name} посадил {target.Name} ({targetCharacterData.WantedLVL.Reason})", true);
+                Manager.sendFractionMessage((int) Models.Fractions.FIB, "!{#FF8C00}[F] " + $"{player.Name} посадил {target.Name} ({targetCharacterData.WantedLVL.Reason})", true);
+                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.Arrest, $"Посадил {target.Name} ({targetCharacterData.UUID})");
 
                 target.Eval($"mp.game.audio.playSoundFrontend(-1, \"Mission_Pass_Notify\", \"DLC_HEISTS_GENERAL_FRONTEND_SOUNDS\", true);");
 
                 targetCharacterData.ArrestTime = (targetCharacterData.WantedLVL.Level >= 5) ? 3600 : (targetCharacterData.WantedLVL.Level * 10 * 60);
                 //if (Functions.Other.IsPlayerToSquare(player, -3740.761f, -7140.5205f, 4145.6113f, 3638.1814f) || Manager.AllMembers[(int) Models.Fractions.SHERIFF].Count == 0) targetCharacterData.ArrestType = 0;
                 //else targetCharacterData.ArrestType = 1;
-                targetCharacterData.ArrestType = (sbyte)sessionData.InArrestArea;
+                targetCharacterData.ArrestType = (int)sessionData.InArrestArea; //скибиди (фул ивент заменить над)
                 int minutes = Convert.ToInt32(targetCharacterData.ArrestTime / 60);
                // Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы посадили игрока ({target.Value}) на {minutes} минут", 3000);
                 //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) посадил Вас на {minutes} минут", 3000);
@@ -1007,9 +1007,26 @@ namespace NeptuneEvo.Fractions
                                 SeatingArrangements.LandingEnd(player);
                             }
                             
-                            if (characterData.ArrestType == 1) player.Position = Sheriff.FirstExitPrisonPosition;
-                            else if (characterData.ArrestType == 2) player.Position = Sheriff.SecondExitPrisonPosition;
-                            else player.Position = Police.ExitPrisonPosition;
+                           if (characterData.ArrestType == 1)
+                            {
+                                player.Position = Sheriff.FirstExitPrisonPosition;
+
+                            }
+                            else if (characterData.ArrestType == 2)
+                            {
+                                player.Position = Sheriff.SecondExitPrisonPosition;
+
+                            }
+                            else if (characterData.ArrestType == 3)
+                            {
+                                player.Position = Prison.ExitPrisonPosition;
+
+                            }
+                            else
+                            {
+                                player.Position = Police.ExitPrisonPosition;
+ 
+                            }
                             
                             characterData.ArrestTime = 0;
                             characterData.ArrestType = 0;
@@ -1042,6 +1059,7 @@ namespace NeptuneEvo.Fractions
                 
                 if (characterData.ArrestType == 1) player.Position = Sheriff.FirstPrisonPosition;
                 else if (characterData.ArrestType == 2) player.Position = Sheriff.SecondPrisonPosition;
+                else if (characterData.ArrestType == 3) player.Position = Prison.PrisonPosition;
                 else player.Position = Police.PrisonPosition;
                 
                 Police.setPlayerWantedLevel(player, null);

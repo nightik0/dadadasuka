@@ -476,6 +476,7 @@ namespace NeptuneEvo.Fractions
             {(int) Models.Fractions.MERRYWEATHER, new Vector3(2154.641, 2921.034, -63.02243)},    // Merryweather
             //{(int) Models.Fractions.SHERIFF, new Vector3(1849.4763, 3695.783, 34.266933)},    // SHERIFF
             {(int) Models.Fractions.SHERIFF, new Vector3(-433.1862, 6003.6655, 31.7)},    // SHERIFF
+            {(int) Models.Fractions.PRISON, new Vector3(-433.1862, 6003.6655, 31.7)},    // PRISON
         };
         public static IReadOnlyDictionary<int, FractionsType> FractionTypes = new Dictionary<int, FractionsType>() // 0 - mafia, 1 gangs, 2 - gov, 3 -  nongov, 4 - bikers
         {
@@ -498,6 +499,7 @@ namespace NeptuneEvo.Fractions
             {(int) Models.Fractions.THELOST, FractionsType.Bikers}, // The Lost
             {(int) Models.Fractions.MERRYWEATHER, FractionsType.Nongov}, // Merryweather
             {(int) Models.Fractions.SHERIFF, FractionsType.Gov}, // LSPD police
+            {(int) Models.Fractions.PRISON, FractionsType.Gov}, // LSPD prsn
         };
         public static IReadOnlyDictionary<int, string> FractionNames = new Dictionary<int, string>()
         {
@@ -520,6 +522,7 @@ namespace NeptuneEvo.Fractions
             {(int) Models.Fractions.THELOST, "The Lost" },
             {(int) Models.Fractions.MERRYWEATHER, "Merryweather Security" },
             {(int) Models.Fractions.SHERIFF, "Sheriff" },
+            {(int) Models.Fractions.PRISON, "Prison" },
         };
         //
         
@@ -2296,6 +2299,7 @@ namespace NeptuneEvo.Fractions
             { (int) Models.Fractions.THELOST, new Vector3(976.768738, -103.651985, 73.725174)},
             { (int) Models.Fractions.MERRYWEATHER, new Vector3(2039.182, 2934.093, -63.02208)},
             { (int) Models.Fractions.SHERIFF, new Vector3()},
+            { (int) Models.Fractions.PRISON, new Vector3()},
         };
         public static Dictionary<int, Vector3> matsCoords = new Dictionary<int, Vector3>()
         {
@@ -2317,6 +2321,7 @@ namespace NeptuneEvo.Fractions
             { (int) Models.Fractions.THELOST, new Vector3(977.1458, -132.7649, 72.84191)},
             { (int) Models.Fractions.MERRYWEATHER, new Vector3(-203.054, -576.0139, 33.46199)},
             { (int) Models.Fractions.SHERIFF, new Vector3(-463.26593, 6009.509, 30f)},
+            { (int) Models.Fractions.PRISON, new Vector3(0, 0, 30f)},
         };
         public static Dictionary<uint, int> maxMats = new Dictionary<uint, int>()
         {

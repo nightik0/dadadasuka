@@ -9,6 +9,7 @@ export default [
     "LSPD",
     "EMS",
     "FIB",
+    "PRISON",
     "Мафия",
     "Мафия",
     "Мафия",

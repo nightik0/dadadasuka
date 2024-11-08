@@ -17,5 +17,6 @@ export default [
     "News",//15
     "The Lost",//16
     "Merryweather Security",//17
-    "Sheriff"//18
+    "Sheriff",//18,
+    "Prison"//19
 ]

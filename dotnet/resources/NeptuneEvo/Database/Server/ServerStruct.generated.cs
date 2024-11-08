@@ -334,6 +334,7 @@ namespace Database
 		[Column("fractionlvl"),     Nullable          ] public int?      Fractionlvl       { get; set; } // int(11)
 		[Column("drugaddi"),        Nullable          ] public ushort?   Drugaddi          { get; set; } // smallint(6) unsigned
 		[Column("arrest"),          Nullable          ] public int?      Arrest            { get; set; } // int(11)
+		[Column("arresttype"),      Nullable          ] public int?      ArrestType        { get; set; } // int(11)
 		[Column("demorgan"),        Nullable          ] public int?      Demorgan          { get; set; } // int(11)
 		[Column("wanted"),          Nullable          ] public string    Wanted            { get; set; } // varchar(512)
 		[Column("biz"),             Nullable          ] public string    Biz               { get; set; } // varchar(50)
